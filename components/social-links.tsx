@@ -1,3 +1,6 @@
+"use client";
+
+import { track } from "@vercel/analytics";
 import { XIcon, LinkedInIcon, GitHubIcon } from "./icons";
 
 const socials = [
@@ -29,6 +32,7 @@ export function SocialLinks() {
           rel="noopener noreferrer"
           aria-label={social.name}
           className="text-zinc-400 transition-all hover:text-zinc-900 hover:scale-110"
+          onClick={() => track("social_link_click", { platform: social.name })}
         >
           <social.icon className="h-5 w-5" />
         </a>

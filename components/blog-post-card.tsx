@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 import { BlogPost } from "@/lib/types";
 
 export function BlogPostCard({ post }: { post: BlogPost }) {
@@ -6,6 +9,7 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
     <Link
       href={`/blog/${post.slug}`}
       className="card-hover group flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-5"
+      onClick={() => track("blog_post_click", { title: post.title, slug: post.slug })}
     >
       <div className="flex items-center gap-2 text-sm text-zinc-500">
         <time dateTime={post.date}>

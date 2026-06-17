@@ -13,14 +13,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Dmytro Virych — AI Consultant for Business";
+const description =
+  "I help small and mid-sized businesses cut costs and move faster with AI — practical strategy and automation that deliver measurable results.";
+
 export const metadata: Metadata = {
-  title: "Dmytro Virych — Indiehacker & Builder",
-  description:
-    "Engineer turned builder. I ship profitable products solo, from Ukraine.",
+  metadataBase: new URL("https://dmytrovirych.com"),
+  title,
+  description,
+  keywords: [
+    "AI consultant",
+    "AI for business",
+    "AI strategy",
+    "AI automation",
+    "business automation",
+    "Dmytro Virych",
+  ],
   openGraph: {
-    title: "Dmytro Virych — Indiehacker & Builder",
-    description:
-      "Engineer turned builder. I ship profitable products solo, from Ukraine.",
+    title,
+    description,
     url: "https://dmytrovirych.com",
     siteName: "Dmytro Virych",
     locale: "en_US",
@@ -28,9 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dmytro Virych — Indiehacker & Builder",
-    description:
-      "Engineer turned builder. I ship profitable products solo, from Ukraine.",
+    title,
+    description,
     creator: "@FounderDmytro",
   },
 };
@@ -41,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#f5f1eb]">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

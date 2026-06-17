@@ -3,7 +3,7 @@ import { NavLink, ProcessStep, Service } from "./types";
 export const siteConfig = {
   name: "Dmytro Virych",
   role: "AI Consultant for Business",
-  email: "Dmytro.Virych@space-whale.io",
+  email: "info@dmytrovirych.com",
   url: "https://dmytrovirych.com",
   // Web3Forms access key — create a free one at https://web3forms.com and set it
   // as NEXT_PUBLIC_WEB3FORMS_KEY in your environment (e.g. Vercel project settings).

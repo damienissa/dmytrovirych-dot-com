@@ -1,21 +1,17 @@
-export interface Project {
-  name: string;
-  url: string;
-  description: string;
-  logo: string;
-  revenueSource: "paddle" | "revenuecat" | "none";
-  revenueKey: string;
-}
-
-export interface BlogPost {
-  slug: string;
+export interface Service {
   title: string;
-  date: string;
+  tagline: string;
   description: string;
-  tags: string[];
-  published: boolean;
+  outcomes: string[];
 }
 
-export interface BlogPostWithContent extends BlogPost {
-  content: string;
+export interface ProcessStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+export interface NavLink {
+  label: string;
+  href: string;
 }

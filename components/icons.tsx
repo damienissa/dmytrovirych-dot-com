@@ -54,6 +54,92 @@ export function ExternalLinkIcon({ className }: { className?: string }) {
   );
 }
 
+export function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.704 5.29a1 1 0 010 1.42l-7.5 7.5a1 1 0 01-1.42 0l-3.5-3.5a1 1 0 111.42-1.42l2.79 2.79 6.79-6.79a1 1 0 011.42 0z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+export function StrategyIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" />
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+    </svg>
+  );
+}
+
+export function AutomationIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z" />
+    </svg>
+  );
+}
+
+export function MenuIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+
+export function CloseIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon({ className }: { className?: string }) {
   return (
     <svg

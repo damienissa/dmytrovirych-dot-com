@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { siteConfig } from "@/lib/site";
+import { audit, siteConfig } from "@/lib/site";
 import { XIcon, LinkedInIcon, GitHubIcon } from "./icons";
 
 export function AboutSection() {
@@ -60,15 +60,20 @@ export function AboutSection() {
                 paying customers.
               </p>
               <p>
-                That matters because most &quot;AI consultants&quot; sell decks.
-                I deliver working systems. When I recommend an automation or an
-                AI strategy, it&apos;s because I know what it takes to actually
-                ship it, run it, and make it pay for itself.
+                That matters here because most &quot;AI consultants&quot; sell
+                decks. I have had to make this kind of software work in
+                production and pay for itself, so when the audit says an
+                opportunity is worth it — or isn&apos;t — that judgement comes
+                from having shipped the thing.
               </p>
               <p>
-                If you run a business and suspect AI could save you time or
-                money but don&apos;t know where to start —{" "}
-                <span className="text-foreground">that&apos;s exactly what I do.</span>
+                I run the {audit.name} for small and mid-sized businesses:{" "}
+                {audit.duration}, a scored opportunity map, and a 90-day
+                roadmap.{" "}
+                <span className="text-foreground">
+                  If you suspect AI could save you real time or money but
+                  can&apos;t rank the options, that&apos;s the problem I solve.
+                </span>
               </p>
             </div>
           </div>

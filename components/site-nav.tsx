@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
-import { navLinks, siteConfig } from "@/lib/site";
+import { call, navLinks, siteConfig } from "@/lib/site";
 import { MenuIcon, CloseIcon } from "./icons";
 
 export function SiteNav() {
@@ -44,7 +44,7 @@ export function SiteNav() {
             onClick={() => track("nav_cta_click")}
             className="btn-primary px-4 py-2 text-sm"
           >
-            Book a consult
+            Book the {call.priceLabel} call
           </a>
         </div>
 
@@ -84,7 +84,7 @@ export function SiteNav() {
               }}
               className="btn-primary justify-center px-4 py-2.5 text-sm"
             >
-              Book a consult
+              Book the {call.priceLabel} call
             </a>
           </div>
         </div>

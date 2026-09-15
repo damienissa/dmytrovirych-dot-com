@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { track } from "@vercel/analytics";
-import { siteConfig } from "@/lib/site";
+import { call, siteConfig } from "@/lib/site";
 import { ArrowRightIcon, CheckIcon } from "./icons";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -29,7 +29,7 @@ export function ContactForm() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     formData.append("access_key", siteConfig.web3formsKey);
-    formData.append("subject", "New inquiry from dmytrovirych.com");
+    formData.append("subject", "New AI Adoption Call request — dmytrovirych.com");
     formData.append("from_name", "dmytrovirych.com");
 
     setStatus("submitting");
@@ -64,10 +64,11 @@ export function ContactForm() {
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cyan-400/15 text-cyan-400">
           <CheckIcon className="h-7 w-7" />
         </div>
-        <h3 className="text-xl font-semibold">Message sent — thank you.</h3>
+        <h3 className="text-xl font-semibold">Request sent — thank you.</h3>
         <p className="max-w-md text-muted">
-          I&apos;ll review your note and get back to you within one business
-          day. Talk soon.
+          I&apos;ll review your note and come back within one business day
+          with a couple of slots and a payment link for the {call.priceLabel}{" "}
+          call.
         </p>
       </div>
     );
@@ -124,14 +125,14 @@ export function ContactForm() {
       </div>
 
       <div className="mt-5">
-        <Field label="What do you want to achieve with AI?" htmlFor="message">
+        <Field label="Where do you think the time or money is going?" htmlFor="message">
           <textarea
             id="message"
             name="message"
             required
             rows={5}
             className={`${inputClass} resize-none`}
-            placeholder="Tell me a bit about your business and where you think AI could help…"
+            placeholder="What your business does, roughly how many people, and the work that feels most repetitive…"
           />
         </Field>
       </div>
@@ -151,7 +152,7 @@ export function ContactForm() {
           "Sending…"
         ) : (
           <>
-            Send inquiry
+            Request the {call.priceLabel} call
             <ArrowRightIcon className="h-4 w-4" />
           </>
         )}

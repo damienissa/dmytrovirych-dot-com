@@ -9,15 +9,16 @@ export function ProblemSection() {
           AI is everywhere. Results aren&apos;t.
         </h2>
         <p className="mt-4 text-lg text-muted">
-          The gap is rarely the technology — it&apos;s knowing where to apply it
-          and having someone who can actually build it. Sound familiar?
+          The gap is rarely the technology — it&apos;s knowing where to apply
+          it, in what order, and what it will actually return. That is a
+          diagnosis problem, and it is what the audit solves.
         </p>
       </div>
 
-      <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-2">
+      <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
         {problems.map((problem, i) => (
           <li
-            key={i}
+            key={problem}
             className="bg-[#07070b] p-7 transition-colors hover:bg-white/[0.03]"
           >
             <span className="font-mono text-sm text-indigo-400">

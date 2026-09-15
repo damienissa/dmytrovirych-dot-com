@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 sm:flex-row">
         <div className="text-center sm:text-left">
           <p className="font-semibold tracking-tight">{siteConfig.name}</p>
-          <p className="mt-1 text-sm text-muted">{siteConfig.role}</p>
+          <p className="mt-1 text-sm text-muted">{siteConfig.shortRole}</p>
         </div>
 
         <div className="flex items-center gap-5">

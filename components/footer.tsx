@@ -1,5 +1,6 @@
 import { siteConfig } from "@/lib/site";
 import { XIcon, LinkedInIcon, GitHubIcon } from "./icons";
+import { Logo } from "./logo";
 
 const socials = [
   { href: siteConfig.social.x, label: "X", Icon: XIcon },
@@ -12,10 +13,8 @@ export function Footer() {
     <footer className="border-t border-[var(--hair)]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 py-12 sm:flex-row sm:items-end sm:justify-between lg:px-14">
         <div>
-          <p className="text-[16.5px] font-medium tracking-[-0.02em]">
-            {siteConfig.name}
-          </p>
-          <p className="mt-1.5 text-[14.5px] font-light text-mist">
+          <Logo />
+          <p className="mt-3 text-[14.5px] font-light text-mist">
             {siteConfig.shortRole}
           </p>
           <a

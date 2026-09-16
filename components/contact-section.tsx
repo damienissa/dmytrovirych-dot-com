@@ -3,37 +3,37 @@ import { ContactForm } from "./contact-form";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-        aria-hidden="true"
-      >
-        <div className="mesh-blob mesh-blob-3" />
-      </div>
-
-      <div className="mx-auto max-w-6xl px-5 py-20 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="lg:pt-6">
-            <span className="eyebrow">Get started</span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Book the {call.priceLabel} {call.name}
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted">
-              Tell me about your business and where you think the time goes.
-              I&apos;ll reply within one business day with a couple of slots and
-              a payment link — then we spend {call.duration} finding your best AI
-              opportunities and scoping the audit.
-            </p>
-            <ul className="mt-8 space-y-3 text-zinc-300">
-              <li>→ A shortlist of opportunities with real ROI, in one session</li>
-              <li>→ Straight answers on what&apos;s realistic and what isn&apos;t</li>
-              <li>→ A written scope and fixed price for the audit</li>
-              <li>→ Notes you can act on yourself, whichever way you go</li>
-            </ul>
-          </div>
-
-          <ContactForm />
+    <section id="contact" className="mx-auto max-w-[1280px] px-6 py-24 lg:px-14 lg:py-32">
+      <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <span className="label label-dim">Get started</span>
+          <h2 className="mt-5 text-[clamp(1.95rem,4.3vw,3.125rem)] font-medium leading-[1.07] tracking-[-0.035em]">
+            Book the {call.priceLabel} {call.name}.
+          </h2>
+          <p className="mt-6 max-w-[48ch] text-lg font-light leading-relaxed text-mist">
+            Tell me about your business and where you think the time goes.
+            I&apos;ll reply within one business day with a couple of slots and a
+            payment link — then we spend {call.duration} finding your best AI
+            opportunities and scoping the audit.
+          </p>
+          <ul className="mt-10 border-t border-[var(--hair)]">
+            {[
+              "A shortlist of opportunities with real return, in one session",
+              "Straight answers on what's realistic and what isn't",
+              "A written scope and fixed price for the audit",
+              "Notes you can act on yourself, whichever way you go",
+            ].map((item) => (
+              <li
+                key={item}
+                className="border-b border-[var(--hair)] py-4 text-[15.5px] font-light text-bone/86"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <ContactForm />
       </div>
     </section>
   );

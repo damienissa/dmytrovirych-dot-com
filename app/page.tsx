@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero";
 import { ProblemSection } from "@/components/problem-section";
 import { AuditSection } from "@/components/audit-section";
 import { ProcessSection } from "@/components/process-section";
+import { PhotoBand } from "@/components/photo-band";
 import { PricingSection } from "@/components/pricing-section";
 import { FitSection } from "@/components/fit-section";
 import { AfterAuditSection } from "@/components/after-audit-section";
@@ -28,6 +29,15 @@ export default function Home() {
         <ProblemSection />
         <AuditSection />
         <ProcessSection />
+        {/* A breath before the money conversation. Add more bands here as
+            further photography comes in. */}
+        <PhotoBand
+          src="/images/mountain-desk.jpg"
+          alt="A mechanical keyboard, notebook and headphones laid out on a weathered wooden table"
+          position="center 86%"
+          label="Independent, remote, hands-on"
+          quote="I build the software I recommend. That is the whole difference."
+        />
         <PricingSection />
         <FitSection />
         <AfterAuditSection />

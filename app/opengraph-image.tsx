@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { audit, call, siteConfig } from "@/lib/site";
 
@@ -6,11 +8,19 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * Generated at build time into a static PNG, so there is no runtime cost and
- * no font fetch at request time. Satori (which powers next/og) needs explicit
- * `display: flex` on any element with more than one child.
+ * Generated at build time into a static PNG. The photograph is read off disk
+ * and inlined, so there is no network fetch during the build.
+ *
+ * Satori (which powers next/og) needs an explicit `display: flex` on any
+ * element with more than one child, and has no `object-position`, so the
+ * photograph is sized and offset by hand to frame the ridgeline.
  */
 export default function OpengraphImage() {
+  const photo = readFileSync(
+    join(process.cwd(), "public/images/mountain-desk.jpg")
+  );
+  const photoSrc = `data:image/jpeg;base64,${photo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -19,120 +29,122 @@ export default function OpengraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          background: "#07070b",
-          padding: "72px 80px",
+          justifyContent: "flex-end",
+          background: "#121311",
           position: "relative",
         }}
       >
-        {/* Accent glows */}
+        {/* Portrait source, cropped to the ridgeline band. */}
+        <img
+          alt=""
+          src={photoSrc}
+          width={1200}
+          height={1600}
+          style={{ position: "absolute", top: -240, left: 0 }}
+        />
+        {/* Same two scrims as the hero: one lifts the type off the sky,
+            one keeps the foot readable. */}
         <div
           style={{
             position: "absolute",
-            top: -220,
-            left: -160,
-            width: 620,
-            height: 620,
-            borderRadius: 9999,
-            background: "#4f46e5",
-            opacity: 0.35,
-            filter: "blur(160px)",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background:
+              "linear-gradient(to top, rgba(18,19,17,0.95) 0%, rgba(18,19,17,0.74) 26%, rgba(18,19,17,0.20) 58%, rgba(18,19,17,0.46) 100%)",
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: -260,
-            right: -140,
-            width: 540,
-            height: 540,
-            borderRadius: 9999,
-            background: "#06b6d4",
-            opacity: 0.26,
-            filter: "blur(160px)",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background:
+              "linear-gradient(to right, rgba(18,19,17,0.72) 0%, rgba(18,19,17,0.42) 38%, rgba(18,19,17,0.06) 72%, rgba(18,19,17,0) 100%)",
           }}
         />
 
-        {/* Eyebrow */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: 24,
-            fontWeight: 600,
-            letterSpacing: 4,
-            textTransform: "uppercase",
-            color: "#818cf8",
-          }}
-        >
-          {audit.name}
-        </div>
-
-        {/* Headline */}
-        <div
-          style={{
+            position: "relative",
             display: "flex",
             flexDirection: "column",
-            marginTop: 8,
+            padding: "0 72px 64px",
           }}
         >
           <div
             style={{
-              fontSize: 78,
-              fontWeight: 800,
-              lineHeight: 1.08,
-              letterSpacing: -2,
-              color: "#ececf1",
-              maxWidth: 940,
+              display: "flex",
+              fontSize: 22,
+              fontWeight: 600,
+              letterSpacing: 4.4,
+              textTransform: "uppercase",
+              color: "#C9A87C",
             }}
           >
-            Find out where AI actually pays off in your business.
+            {audit.name}
           </div>
           <div
             style={{
-              marginTop: 28,
-              fontSize: 30,
-              lineHeight: 1.4,
-              color: "#9a9aa8",
-              maxWidth: 880,
+              marginTop: 22,
+              fontSize: 76,
+              fontWeight: 600,
+              lineHeight: 1.04,
+              letterSpacing: -3,
+              color: "#F2F1EC",
+              maxWidth: 900,
+            }}
+          >
+            Find out where AI actually pays off.
+          </div>
+          <div
+            style={{
+              marginTop: 26,
+              fontSize: 27,
+              color: "rgba(242,241,236,0.76)",
+              maxWidth: 820,
             }}
           >
             {`${audit.duration} · scored opportunity map · ROI per opportunity · 90-day roadmap`}
           </div>
-        </div>
-
-        {/* Footer row */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderTop: "1px solid rgba(255,255,255,0.12)",
-            paddingTop: 32,
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 30, fontWeight: 700, color: "#ececf1" }}>
-              {siteConfig.name}
-            </div>
-            <div style={{ fontSize: 24, color: "#9a9aa8", marginTop: 6 }}>
-              dmytrovirych.com
-            </div>
-          </div>
 
           <div
             style={{
+              marginTop: 42,
+              paddingTop: 28,
+              borderTop: "1px solid rgba(242,241,236,0.2)",
               display: "flex",
               alignItems: "center",
-              borderRadius: 999,
-              padding: "16px 32px",
-              fontSize: 26,
-              fontWeight: 700,
-              color: "#07070b",
-              background: "linear-gradient(120deg, #6366f1, #22d3ee)",
+              justifyContent: "space-between",
             }}
           >
-            {`Starts with a ${call.priceLabel} call`}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ fontSize: 27, fontWeight: 600, color: "#F2F1EC" }}>
+                {siteConfig.name}
+              </div>
+              <div
+                style={{ fontSize: 22, color: "rgba(242,241,236,0.6)", marginTop: 5 }}
+              >
+                dmytrovirych.com
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "15px 30px",
+                fontSize: 24,
+                fontWeight: 600,
+                color: "#121311",
+                background: "#F2F1EC",
+                borderRadius: 2,
+              }}
+            >
+              {`Starts with a ${call.priceLabel} call`}
+            </div>
           </div>
         </div>
       </div>

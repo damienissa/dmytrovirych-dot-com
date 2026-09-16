@@ -60,12 +60,12 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="gradient-border flex flex-col items-center gap-4 p-10 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cyan-400/15 text-cyan-400">
+      <div className="flex flex-col items-center gap-4 rounded-[3px] border border-[var(--hair)] bg-bone/[0.035] p-10 text-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--hair-strong)] text-sand">
           <CheckIcon className="h-7 w-7" />
         </div>
-        <h3 className="text-xl font-semibold">Request sent — thank you.</h3>
-        <p className="max-w-md text-muted">
+        <h3 className="text-xl font-medium tracking-[-0.02em]">Request sent — thank you.</h3>
+        <p className="max-w-md font-light text-mist">
           I&apos;ll review your note and come back within one business day
           with a couple of slots and a payment link for the {call.priceLabel}{" "}
           call.
@@ -75,7 +75,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="gradient-border p-7 sm:p-9">
+    <form onSubmit={handleSubmit} className="rounded-[3px] border border-[var(--hair)] bg-bone/[0.035] p-7 sm:p-10">
       {/* Honeypot for spam bots */}
       <input
         type="checkbox"
@@ -138,7 +138,7 @@ export function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="mt-5 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <p className="mt-5 rounded-[3px] border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200">
           {error}
         </p>
       )}
@@ -146,7 +146,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="btn-primary mt-7 w-full justify-center px-6 py-3.5 text-base disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-primary mt-8 w-full px-6 py-4 text-[15px] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? (
           "Sending…"
@@ -158,11 +158,11 @@ export function ContactForm() {
         )}
       </button>
 
-      <p className="mt-4 text-center text-xs text-muted">
+      <p className="mt-5 text-center text-[13px] font-light text-mist">
         Prefer email? Reach me at{" "}
         <a
           href={`mailto:${siteConfig.email}`}
-          className="text-indigo-300 hover:underline"
+          className="text-sand hover:underline"
         >
           {siteConfig.email}
         </a>
@@ -171,8 +171,7 @@ export function ContactForm() {
   );
 }
 
-const inputClass =
-  "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-foreground placeholder:text-zinc-500 transition-colors focus:border-indigo-400/60 focus:outline-none focus:ring-2 focus:ring-indigo-500/30";
+const inputClass = "field";
 
 function Field({
   label,
@@ -185,7 +184,7 @@ function Field({
 }) {
   return (
     <label htmlFor={htmlFor} className="block">
-      <span className="mb-2 block text-sm font-medium text-zinc-300">
+      <span className="mb-2 block text-[13px] font-medium uppercase tracking-[0.12em] text-mist">
         {label}
       </span>
       {children}

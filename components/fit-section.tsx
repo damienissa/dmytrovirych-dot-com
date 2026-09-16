@@ -1,55 +1,50 @@
 import { goodFit, notFit } from "@/lib/site";
-import { CheckIcon, CrossIcon } from "./icons";
 
 export function FitSection() {
   return (
-    <section id="fit" className="relative">
-      <div className="mx-auto max-w-6xl px-5 py-20 lg:py-28">
-        <div className="max-w-2xl">
-          <span className="eyebrow">Fit</span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Who this is — and isn&apos;t — for
-          </h2>
-          <p className="mt-4 text-lg text-muted">
-            An audit only pays for itself if you act on it. Here is the honest
-            filter, so neither of us wastes the call.
-          </p>
+    <section id="fit" className="mx-auto max-w-[1280px] px-6 py-24 lg:px-14 lg:py-32">
+      <div className="max-w-[58ch]">
+        <span className="label label-dim">Fit</span>
+        <h2 className="mt-5 text-[clamp(1.95rem,4.3vw,3.125rem)] font-medium leading-[1.07] tracking-[-0.035em]">
+          Who this is — and isn&apos;t — for.
+        </h2>
+        <p className="mt-5 max-w-[50ch] text-lg font-light text-mist">
+          An audit only pays for itself if you act on it. Here is the honest
+          filter, so neither of us wastes the call.
+        </p>
+      </div>
+
+      <div className="mt-16 grid gap-y-14 lg:grid-cols-2 lg:gap-x-20">
+        <div>
+          <h3 className="border-b border-[var(--hair-strong)] pb-4 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-sand">
+            A good fit
+          </h3>
+          <ul>
+            {goodFit.map((item) => (
+              <li
+                key={item}
+                className="border-b border-[var(--hair)] py-5 text-[16px] font-light leading-relaxed text-bone/88"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          <div className="glass-card rounded-2xl p-8">
-            <h3 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
-              <CheckIcon className="h-5 w-5 text-cyan-400" />
-              A good fit
-            </h3>
-            <ul className="mt-6 space-y-4">
-              {goodFit.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" />
-                  <span className="text-sm leading-relaxed text-zinc-300">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="glass-card rounded-2xl p-8">
-            <h3 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
-              <CrossIcon className="h-5 w-5 text-zinc-500" />
-              Not a fit
-            </h3>
-            <ul className="mt-6 space-y-4">
-              {notFit.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <CrossIcon className="mt-0.5 h-5 w-5 shrink-0 text-zinc-600" />
-                  <span className="text-sm leading-relaxed text-muted">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div>
+          <h3 className="border-b border-[var(--hair-strong)] pb-4 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-mist">
+            Not a fit
+          </h3>
+          <ul>
+            {notFit.map((item) => (
+              <li
+                key={item}
+                className="border-b border-[var(--hair)] py-5 text-[16px] font-light leading-relaxed text-mist"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

@@ -2,29 +2,29 @@ import { problems } from "@/lib/site";
 
 export function ProblemSection() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-20 lg:py-28">
-      <div className="max-w-2xl">
-        <span className="eyebrow">The problem</span>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+    <section className="mx-auto max-w-[1280px] px-6 py-24 lg:px-14 lg:py-32">
+      <div className="max-w-[58ch]">
+        <span className="label label-dim">The problem</span>
+        <h2 className="mt-5 text-[clamp(1.95rem,4.3vw,3.125rem)] font-medium leading-[1.07] tracking-[-0.035em]">
           AI is everywhere. Results aren&apos;t.
         </h2>
-        <p className="mt-4 text-lg text-muted">
+        <p className="mt-5 max-w-[50ch] text-lg font-light text-mist">
           The gap is rarely the technology — it&apos;s knowing where to apply
           it, in what order, and what it will actually return. That is a
           diagnosis problem, and it is what the audit solves.
         </p>
       </div>
 
-      <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-16 grid border-t border-[var(--hair)] sm:grid-cols-2 lg:grid-cols-3">
         {problems.map((problem, i) => (
           <li
             key={problem}
-            className="bg-[#07070b] p-7 transition-colors hover:bg-white/[0.03]"
+            className="border-b border-[var(--hair)] py-8 pr-10 sm:[&:nth-child(odd)]:pr-14 lg:pr-14"
           >
-            <span className="font-mono text-sm text-indigo-400">
+            <span className="text-[11.5px] font-semibold uppercase tracking-[0.16em] text-sand">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <p className="mt-3 text-base leading-relaxed text-zinc-300">
+            <p className="mt-4 text-[16px] font-light leading-relaxed text-bone/85">
               {problem}
             </p>
           </li>

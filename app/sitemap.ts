@@ -1,5 +1,21 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: "https://dmytrovirych.com", lastModified: new Date() }];
+  const lastModified = new Date();
+
+  return [
+    {
+      url: siteConfig.url,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: `${siteConfig.url}/llms.txt`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
+  ];
 }

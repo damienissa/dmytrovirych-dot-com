@@ -1,39 +1,72 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { call, siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const title = "Dmytro Virych — AI Consultant for Business";
+// Front-loads the primary keyword ("AI Adoption Audit") and stays inside the
+// ~60-char limit Google renders before truncating.
+const title = "AI Adoption Audit | Dmytro Virych";
 const description =
-  "I help small and mid-sized businesses cut costs and move faster with AI — practical strategy and automation that deliver measurable results.";
+  "A two-week AI adoption audit for small and mid-sized businesses: a scored map of every AI opportunity you have, ROI estimates for each, and a 90-day roadmap. Starts with a " +
+  call.priceLabel +
+  " call.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dmytrovirych.com"),
-  title,
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: title,
+    template: `%s | ${siteConfig.name}`,
+  },
   description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "Business consulting",
   keywords: [
-    "AI consultant",
-    "AI for business",
-    "AI strategy",
-    "AI automation",
-    "business automation",
+    "AI adoption audit",
+    "AI audit",
+    "AI readiness assessment",
+    "AI consultant for small business",
+    "AI opportunity assessment",
+    "AI strategy consultant",
+    "AI ROI analysis",
+    "business process automation consultant",
+    "AI roadmap",
     "Dmytro Virych",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title,
     description,
-    url: "https://dmytrovirych.com",
-    siteName: "Dmytro Virych",
+    url: siteConfig.url,
+    siteName: `${siteConfig.name} — ${siteConfig.shortRole}`,
     locale: "en_US",
     type: "website",
   },
@@ -42,7 +75,18 @@ export const metadata: Metadata = {
     title,
     description,
     creator: "@FounderDmytro",
+    site: "@FounderDmytro",
   },
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#121311",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

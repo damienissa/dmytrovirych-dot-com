@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
-import { navLinks, siteConfig } from "@/lib/site";
+import { call, navLinks, siteConfig } from "@/lib/site";
 import { MenuIcon, CloseIcon } from "./icons";
 
 export function SiteNav() {
@@ -10,7 +10,8 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    // Transparent over the hero photograph, solid once it scrolls past.
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -19,22 +20,25 @@ export function SiteNav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled
-          ? "border-b border-white/10 bg-[#07070b]/80 backdrop-blur-md"
+        scrolled || open
+          ? "border-b border-[var(--hair)] bg-ground/92 backdrop-blur-md"
           : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#top" className="font-semibold tracking-tight">
+      <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-5 lg:px-14">
+        <a
+          href="#top"
+          className="text-[16.5px] font-medium tracking-[-0.02em]"
+        >
           {siteConfig.name}
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted transition-colors hover:text-foreground"
+              className="text-[14.5px] text-bone/72 transition-colors hover:text-bone"
             >
               {link.label}
             </a>
@@ -42,50 +46,49 @@ export function SiteNav() {
           <a
             href="#contact"
             onClick={() => track("nav_cta_click")}
-            className="btn-primary px-4 py-2 text-sm"
+            className="btn-primary px-5 py-2.5 text-[14px]"
           >
-            Book a consult
+            Book the {call.priceLabel} call
           </a>
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="text-foreground md:hidden"
-        >
-          {open ? (
-            <CloseIcon className="h-6 w-6" />
-          ) : (
-            <MenuIcon className="h-6 w-6" />
-          )}
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <a
+            href="#contact"
+            onClick={() => track("nav_cta_click")}
+            className="btn-primary px-4 py-2.5 text-[13.5px]"
+          >
+            Book the {call.priceLabel} call
+          </a>
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="text-bone"
+          >
+            {open ? (
+              <CloseIcon className="h-6 w-6" />
+            ) : (
+              <MenuIcon className="h-6 w-6" />
+            )}
+          </button>
+        </div>
       </nav>
 
       {open && (
-        <div className="border-t border-white/10 bg-[#07070b]/95 px-5 py-4 backdrop-blur-md md:hidden">
+        <div className="border-t border-[var(--hair)] px-6 py-5 md:hidden">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className="text-[15px] text-bone/80 transition-colors hover:text-bone"
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={() => {
-                setOpen(false);
-                track("nav_cta_click");
-              }}
-              className="btn-primary justify-center px-4 py-2.5 text-sm"
-            >
-              Book a consult
-            </a>
           </div>
         </div>
       )}

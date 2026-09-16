@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
 import { call, navLinks, siteConfig } from "@/lib/site";
 import { MenuIcon, CloseIcon } from "./icons";
+import { Logo } from "./logo";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,11 +27,8 @@ export function SiteNav() {
       }`}
     >
       <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-5 lg:px-14">
-        <a
-          href="#top"
-          className="text-[16.5px] font-medium tracking-[-0.02em]"
-        >
-          {siteConfig.name}
+        <a href="#top" aria-label={`${siteConfig.name} — home`}>
+          <Logo />
         </a>
 
         <div className="hidden items-center gap-9 md:flex">

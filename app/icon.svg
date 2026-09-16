@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .t{fill:#8A6420}.l{fill:#121311}.r{fill:#4A4D45}
+    @media (prefers-color-scheme:dark){.t{fill:#C9A87C}.l{fill:#F2F1EC}.r{fill:#6D7064}}
+  </style>
+  <path class="t" d="M50 6 L88 28 L50 50 L12 28 Z"/>
+  <path class="l" d="M12 28 L50 50 V94 L12 72 Z"/>
+  <path class="r" d="M88 28 V72 L50 94 V50 Z"/>
+</svg>

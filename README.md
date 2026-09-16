@@ -49,6 +49,34 @@ glow, no glass, no cards with fills — sections are separated by hairlines and
 whitespace. Headline sizes are fluid (`clamp()`), so nothing needs a breakpoint
 to stay in proportion.
 
+### Logo and icons
+
+The mark is an isometric cube in three faces. The geometry lives in three
+places and must stay in step:
+
+| File | Use |
+| --- | --- |
+| [`components/logo.tsx`](components/logo.tsx) | `<LogoMark />` and `<Logo />` for the nav and footer |
+| [`app/icon.svg`](app/icon.svg) | the primary favicon |
+| [`app/opengraph-image.tsx`](app/opengraph-image.tsx) | the mark on the social card |
+
+`app/icon.svg` swaps palette with `prefers-color-scheme`: on a light browser
+tab the bone face would vanish against white, so the light scheme uses the
+dark-on-light colours instead.
+
+`app/favicon.ico` (16/32/48) and `app/apple-icon.png` (180×180) are raster
+fallbacks and are generated, not hand-made. They sit on an opaque `#121311`
+plate so they read on any background, since neither format can adapt to the
+browser theme. To regenerate after a change to the mark, re-run the generator
+in the scratchpad — note that **the PNGs inside an `.ico` must be colour type 6
+(RGBA)** or the Next.js build fails with `The PNG is not in RGBA format`, and
+Chromium's encoder drops the alpha channel whenever every pixel is opaque, so
+the PNGs are encoded by hand rather than screenshotted.
+
+Do not use a single flat fill for a one-colour version of the mark: three
+identically-filled faces collapse into a plain hexagon. Use tonal steps
+(100% / 72% / 45% of one colour) instead.
+
 ### Adding photography
 
 Drop the file in `public/images/`, then render another

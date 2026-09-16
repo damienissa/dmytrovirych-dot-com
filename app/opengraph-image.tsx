@@ -121,14 +121,22 @@ export default function OpengraphImage() {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: 27, fontWeight: 600, color: "#F2F1EC" }}>
-                {siteConfig.name}
-              </div>
-              <div
-                style={{ fontSize: 22, color: "rgba(242,241,236,0.6)", marginTop: 5 }}
-              >
-                dmytrovirych.com
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              {/* The mark, same paths as components/logo.tsx and app/icon.svg. */}
+              <svg width="42" height="42" viewBox="0 0 100 100">
+                <path d="M50 6 L88 28 L50 50 L12 28 Z" fill="#C9A87C" />
+                <path d="M12 28 L50 50 V94 L12 72 Z" fill="#F2F1EC" />
+                <path d="M88 28 V72 L50 94 V50 Z" fill="#6D7064" />
+              </svg>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ fontSize: 27, fontWeight: 600, color: "#F2F1EC" }}>
+                  {siteConfig.name}
+                </div>
+                <div
+                  style={{ fontSize: 22, color: "rgba(242,241,236,0.6)", marginTop: 5 }}
+                >
+                  dmytrovirych.com
+                </div>
               </div>
             </div>
             <div

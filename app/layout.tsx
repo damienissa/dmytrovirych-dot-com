@@ -1,28 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import { call, siteConfig } from "@/lib/site";
+import { products, siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Apple devices render SF Pro from the system stack in globals.css; Inter is
+// the fallback everywhere else.
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Front-loads the primary keyword ("AI Adoption Audit") and stays inside the
-// ~60-char limit Google renders before truncating.
-const title = "AI Adoption Audit | Dmytro Virych";
-const description =
-  "A two-week AI adoption audit for small and mid-sized businesses: a scored map of every AI opportunity you have, ROI estimates for each, and a 90-day roadmap. Starts with a " +
-  call.priceLabel +
-  " call.";
+const title = `${siteConfig.name} — ${siteConfig.role}`;
+const description = `${siteConfig.tagline} ${products.length} products built and run solo: ${products
+  .map((p) => p.name)
+  .join(", ")}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -35,18 +28,14 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  category: "Business consulting",
+  category: "Technology",
   keywords: [
-    "AI adoption audit",
-    "AI audit",
-    "AI readiness assessment",
-    "AI consultant for small business",
-    "AI opportunity assessment",
-    "AI strategy consultant",
-    "AI ROI analysis",
-    "business process automation consultant",
-    "AI roadmap",
     "Dmytro Virych",
+    "indie hacker",
+    "indie maker",
+    "macOS apps",
+    "Mac apps",
+    ...products.map((p) => p.name),
   ],
   alternates: {
     canonical: "/",
@@ -66,7 +55,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: siteConfig.url,
-    siteName: `${siteConfig.name} — ${siteConfig.shortRole}`,
+    siteName: siteConfig.name,
     locale: "en_US",
     type: "website",
   },
@@ -85,8 +74,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#121311",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({
@@ -97,7 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
       >
         {children}
         <Analytics />

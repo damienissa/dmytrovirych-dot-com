@@ -3,7 +3,7 @@ import { extname, join } from "node:path";
 import { ImageResponse } from "next/og";
 import { products, siteConfig } from "@/lib/site";
 
-export const alt = `${siteConfig.name} — ${siteConfig.role}. ${siteConfig.tagline}`;
+export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -20,8 +20,8 @@ function inline(publicPath: string) {
 }
 
 /**
- * Generated at build time into a static PNG: the page's hero in miniature,
- * with the product icons lined up like a Dock.
+ * Generated at build time into a static PNG: the page header in miniature,
+ * with the product icons in a row underneath.
  *
  * Satori (which powers next/og) needs an explicit `display: flex` on any
  * element with more than one child.
@@ -35,61 +35,42 @@ export default function OpengraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
-          background: "#f5f5f7",
-          color: "#1d1d1f",
+          padding: "0 86px",
+          background: "#f5f4f4",
+          color: "#111",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <img
-            alt=""
-            src={inline("/images/avatar.jpg")}
-            width={64}
-            height={64}
-            style={{ borderRadius: 32 }}
-          />
-          <div style={{ fontSize: 30, fontWeight: 600, color: "#6e6e73" }}>
-            {`${siteConfig.name} · ${siteConfig.role}`}
-          </div>
-        </div>
+        <img
+          alt=""
+          src={inline("/images/avatar.jpg")}
+          width={150}
+          height={150}
+          style={{ borderRadius: 75 }}
+        />
         <div
           style={{
-            marginTop: 26,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            fontSize: 88,
+            marginTop: 30,
+            fontSize: 128,
             fontWeight: 700,
-            letterSpacing: -3.5,
-            lineHeight: 1.04,
-            textAlign: "center",
+            letterSpacing: -7,
+            lineHeight: 1,
           }}
         >
-          <div>Small software.</div>
-          <div>Made with care.</div>
+          {siteConfig.name}
         </div>
-
-        <div
-          style={{
-            marginTop: 56,
-            display: "flex",
-            gap: 22,
-            padding: "18px 24px",
-            borderRadius: 32,
-            background: "rgba(255,255,255,0.8)",
-            border: "1px solid #e5e5ea",
-            boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
-          }}
-        >
+        <div style={{ marginTop: 20, fontSize: 34, color: "#444" }}>
+          {siteConfig.tagline}
+        </div>
+        <div style={{ marginTop: 44, display: "flex", gap: 16 }}>
           {products.map((p) => (
             <img
               key={p.slug}
               alt=""
               src={inline(p.icon)}
-              width={84}
-              height={84}
-              style={{ borderRadius: 19 }}
+              width={64}
+              height={64}
+              style={{ borderRadius: 15 }}
             />
           ))}
         </div>

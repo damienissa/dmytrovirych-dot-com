@@ -1,42 +1,45 @@
 import Image from "next/image";
-import { products, siteConfig } from "@/lib/site";
-import { ChevronRightIcon } from "./icons";
+import { siteConfig } from "@/lib/site";
+import { GitHubIcon, LinkedInIcon, XIcon } from "./icons";
+
+const socials = [
+  { href: siteConfig.social.x, label: "X", Icon: XIcon },
+  { href: siteConfig.social.github, label: "GitHub", Icon: GitHubIcon },
+  { href: siteConfig.social.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
+];
 
 export function Hero() {
   return (
-    <section id="top" className="overflow-hidden px-4 pt-20 pb-16 text-center sm:px-6 sm:pt-28 sm:pb-24">
-      <Image
-        src="/images/avatar.jpg"
-        alt={siteConfig.name}
-        width={112}
-        height={112}
-        priority
-        className="rise mx-auto h-24 w-24 rounded-full object-cover shadow-[0_8px_30px_rgba(0,0,0,0.12)] sm:h-28 sm:w-28"
-      />
-      <p className="rise rise-1 mt-7 text-[17px] font-semibold text-ink-2 sm:text-[21px]">
-        {siteConfig.name} · {siteConfig.role}
-      </p>
-      <h1 className="display rise rise-2 mx-auto mt-2 max-w-[16ch] text-[clamp(2.75rem,8vw,5.5rem)] leading-[1.04]">
-        Small software. Made&nbsp;with&nbsp;care.
-      </h1>
-      <p className="rise rise-3 mx-auto mt-6 max-w-[34ch] text-[19px] leading-[1.45] text-ink-2 sm:text-[24px]">
-        {products.length} products, designed, built and run solo — most of them
-        native apps for the Mac.
-      </p>
-      <div className="rise rise-4 mt-9 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
-        <a href="#products" className="btn">
-          See what I&apos;ve built
-        </a>
-        <a
-          href={siteConfig.social.x}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="chev-link"
-        >
-          Follow the build on X
-          <ChevronRightIcon className="h-3.5 w-3.5" />
-        </a>
+    <header className="bg-[#f5f4f4]">
+      <div className="px-5 pt-8 pb-20 sm:px-[86px] sm:pt-8 sm:pb-[104px]">
+        <Image
+          src="/images/avatar.jpg"
+          alt={siteConfig.name}
+          width={300}
+          height={300}
+          priority
+          className="h-[120px] w-[120px] rounded-full object-cover sm:h-[150px] sm:w-[150px]"
+        />
+        <h1 className="mt-7 text-[clamp(3.5rem,8.5vw,7rem)] leading-[0.95] font-bold tracking-[-0.055em] text-[#111]">
+          {siteConfig.name}
+        </h1>
+        <p className="mt-5 text-[19px] text-[#444] sm:text-[21px]">{siteConfig.tagline}</p>
+        <ul className="mt-8 flex gap-[7px]">
+          {socials.map(({ href, label, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-[#111] text-white transition-transform hover:scale-105"
+              >
+                <Icon className="h-[18px] w-[18px]" />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </header>
   );
 }

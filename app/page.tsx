@@ -1,8 +1,7 @@
-import { SiteNav } from "@/components/site-nav";
 import { Hero } from "@/components/hero";
-import { ProductsSection } from "@/components/products-section";
-import { AboutSection } from "@/components/about-section";
+import { ProductsCarousel } from "@/components/products-carousel";
 import { Footer } from "@/components/footer";
+import { products } from "@/lib/site";
 import { buildStructuredData } from "@/lib/structured-data";
 
 export default function Home() {
@@ -14,11 +13,16 @@ export default function Home() {
           __html: JSON.stringify(buildStructuredData()).replace(/</g, "\\u003c"),
         }}
       />
-      <SiteNav />
+      <Hero />
       <main>
-        <Hero />
-        <ProductsSection />
-        <AboutSection />
+        <section id="products" className="pt-20 sm:pt-[84px]">
+          <h2 className="px-5 text-[clamp(2.5rem,5vw,3.6rem)] leading-none font-bold tracking-[-0.05em] text-[#111] sm:px-[86px]">
+            Things I&rsquo;ve built
+          </h2>
+          <div className="mt-9">
+            <ProductsCarousel products={products} />
+          </div>
+        </section>
       </main>
       <Footer />
     </>

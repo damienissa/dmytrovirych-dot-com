@@ -4,16 +4,14 @@ import { Analytics } from "@vercel/analytics/react";
 import { products, siteConfig } from "@/lib/site";
 import "./globals.css";
 
-// Apple devices render SF Pro from the system stack in globals.css; Inter is
-// the fallback everywhere else.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const title = `${siteConfig.name} — ${siteConfig.role}`;
-const description = `${siteConfig.tagline} ${products.length} products built and run solo: ${products
+const title = `${siteConfig.name} — ${siteConfig.tagline}`;
+const description = `${siteConfig.tagline}. Things I\u2019ve built: ${products
   .map((p) => p.name)
   .join(", ")}.`;
 
@@ -74,11 +72,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
-  colorScheme: "light dark",
+  themeColor: "#f5f4f4",
+  colorScheme: "light",
 };
 
 export default function RootLayout({

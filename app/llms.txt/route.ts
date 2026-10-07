@@ -9,19 +9,16 @@ export const dynamic = "force-static";
 
 function render() {
   const lines: string[] = [
-    `# ${siteConfig.name} — ${siteConfig.role}`,
+    `# ${siteConfig.name}`,
     "",
-    `> ${siteConfig.name} is an independent software maker. ${siteConfig.tagline}`,
+    `> ${siteConfig.tagline}.`,
     "",
     "## Products",
     "",
   ];
 
   for (const p of products) {
-    const meta = [p.category, p.platform, p.price].filter(Boolean).join(" · ");
-    lines.push(
-      `- [${p.name}](${p.url}) (${meta}): ${p.headline} ${p.description}`
-    );
+    lines.push(`- [${p.title}](${p.url}) (${p.platform}): ${p.description}`);
   }
 
   lines.push(

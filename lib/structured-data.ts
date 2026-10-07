@@ -24,7 +24,7 @@ export function buildStructuredData() {
         name: siteConfig.name,
         url: siteConfig.url,
         image: `${siteConfig.url}/images/avatar.jpg`,
-        jobTitle: "Indie hacker and software engineer",
+        jobTitle: "Indie hacker",
         description: `Independent maker of ${products.length} software products, mostly native macOS apps.`,
         email: `mailto:${siteConfig.email}`,
         knowsAbout: [
@@ -54,7 +54,7 @@ export function buildStructuredData() {
             "@type": "SoftwareApplication",
             name: p.name,
             url: p.url,
-            description: `${p.headline} ${p.description}`,
+            description: p.description,
             applicationCategory: p.schemaCategory,
             operatingSystem: p.platform,
             image: `${siteConfig.url}${p.image}`,

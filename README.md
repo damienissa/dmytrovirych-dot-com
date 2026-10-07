@@ -1,7 +1,7 @@
 # dmytrovirych.com
 
-Indie hacker portfolio for **Dmytro Virych**. A single, Apple-inspired page
-showing every product I've built. Next.js 16, React 19, Tailwind CSS 4.
+Indie hacker portfolio for **Dmytro Virych**: a profile header and a
+"Things I've built" carousel. Next.js 16, React 19, Tailwind CSS 4.
 
 ## Products
 
@@ -29,13 +29,12 @@ To add a product, drop those two files in and add an entry to `products`.
 
 ## Design
 
-- Apple neutrals: white and `#f5f5f7` bands, `#1d1d1f` ink, one blue for
-  anything clickable. Tokens live in `app/globals.css` and switch with
-  `prefers-color-scheme`.
-- SF Pro via the system font stack on Apple devices, Inter elsewhere.
-- Sticky translucent nav, pill buttons, chevron links, rounded product tiles.
-- Entrance and scroll-reveal animations are CSS-only and respect
-  `prefers-reduced-motion`.
+- Light grey header band: avatar, oversized name, one-line tagline, round
+  black social buttons.
+- "Things I've built": a scroll-snap carousel of product cards (artwork,
+  icon + domain, open arrow, site title, site description) with arrows and
+  dots (`components/products-carousel.tsx`).
+- Inter, bold and tightly tracked for headings.
 
 ## Develop
 

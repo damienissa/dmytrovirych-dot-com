@@ -2,7 +2,7 @@ import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { GitHubIcon, LinkedInIcon, XIcon } from "./icons";
 
-const socials = [
+export const socials = [
   { href: siteConfig.social.x, label: "X", Icon: XIcon },
   { href: siteConfig.social.github, label: "GitHub", Icon: GitHubIcon },
   { href: siteConfig.social.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
@@ -10,21 +10,23 @@ const socials = [
 
 export function Hero() {
   return (
-    <header className="bg-[#f5f4f4]">
-      <div className="px-5 pt-8 pb-20 sm:px-[86px] sm:pt-8 sm:pb-[104px]">
+    <header id="top" className="bg-surface">
+      <div className="mx-auto max-w-5xl px-4 pt-16 pb-8 sm:px-6 sm:pt-[120px] sm:pb-[120px]">
         <Image
           src="/images/avatar.jpg"
           alt={siteConfig.name}
-          width={300}
-          height={300}
+          width={352}
+          height={352}
           priority
-          className="h-[120px] w-[120px] rounded-full object-cover sm:h-[150px] sm:w-[150px]"
+          className="h-28 w-28 rounded-full object-cover sm:h-44 sm:w-44"
         />
-        <h1 className="mt-7 text-[clamp(3.5rem,8.5vw,7rem)] leading-[0.95] font-bold tracking-[-0.055em] text-[#111]">
+        <h1 className="mt-5 text-[clamp(40px,7.8vw,112px)] leading-[1.02] font-bold tracking-[-0.055em] text-ink sm:leading-none">
           {siteConfig.name}
         </h1>
-        <p className="mt-5 text-[19px] text-[#444] sm:text-[21px]">{siteConfig.tagline}</p>
-        <ul className="mt-8 flex gap-[7px]">
+        <p className="mt-5 text-[20px] leading-[1.4] text-ink/72 sm:mt-[31px] sm:text-[24px] sm:leading-[1.33]">
+          {siteConfig.tagline}
+        </p>
+        <ul className="mt-6 flex gap-1.5 sm:mt-8 sm:gap-2">
           {socials.map(({ href, label, Icon }) => (
             <li key={label}>
               <a
@@ -32,9 +34,9 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-[#111] text-white transition-transform hover:scale-105"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-white transition-transform hover:scale-105 active:scale-95 sm:h-14 sm:w-14"
               >
-                <Icon className="h-[18px] w-[18px]" />
+                <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
               </a>
             </li>
           ))}

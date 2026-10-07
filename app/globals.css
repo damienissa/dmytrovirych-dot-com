@@ -2,13 +2,29 @@
 
 @theme inline {
   --font-sans: var(--font-inter);
+  --color-ink: #111111;
+  --color-ink-2: #6b6b6b;
+  --color-surface: #f7f7f7;
+  --color-surface-hover: #efefef;
 }
 
 body {
   background: #ffffff;
   color: #111111;
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui,
-    sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Full-bleed carousel whose first card lines up with the 1024px column. */
+.track-gutter {
+  --gutter: 16px;
+  padding-inline: max(var(--gutter), calc((100% - 1024px) / 2 + 24px));
+  scroll-padding-inline: max(var(--gutter), calc((100% - 1024px) / 2 + 24px));
+}
+@media (min-width: 640px) {
+  .track-gutter {
+    --gutter: 24px;
+  }
 }

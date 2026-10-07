@@ -29,12 +29,18 @@ To add a product, drop those two files in and add an entry to `products`.
 
 ## Design
 
-- Light grey header band: avatar, oversized name, one-line tagline, round
-  black social buttons.
-- "Things I've built": a scroll-snap carousel of product cards (artwork,
-  icon + domain, open arrow, site title, site description) with arrows and
-  dots (`components/products-carousel.tsx`).
-- Inter, bold and tightly tracked for headings.
+Sizes follow the reference layout, measured from the live page:
+
+- A centred 1024px column (`max-w-5xl`, 16px / 24px gutters).
+- Header band (`#f7f7f7`): 176px avatar, 112px bold name (40px on mobile,
+  -0.055em tracking), 24px tagline at 72% ink, 56px round black socials.
+- A floating pill with avatar, name and socials appears once the header
+  scrolls away (`components/compact-header.tsx`).
+- "Things I've built" (64px / 30px): a full-bleed scroll-snap carousel whose
+  first card lines up with the column. Cards are 340px wide, `#f7f7f7`,
+  32px radius, 8px inset image, 32px bold title (20px on mobile), 14px
+  description in `#6b6b6b` (`components/products-carousel.tsx`).
+- Inter throughout.
 
 ## Develop
 

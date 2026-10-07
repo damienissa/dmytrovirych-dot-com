@@ -12,46 +12,48 @@ function ProductCard({ product }: { product: Product }) {
       target="_blank"
       rel="noopener"
       data-card
-      className="group flex w-[82vw] max-w-[292px] shrink-0 snap-start flex-col rounded-[24px] bg-[#f5f5f5] p-[6px] sm:w-[292px]"
+      className="group flex w-[74vw] max-w-[420px] shrink-0 snap-start flex-col rounded-[24px] bg-surface p-1.5 transition-colors hover:bg-surface-hover sm:min-h-[450px] sm:w-[340px] sm:rounded-[32px] sm:p-2"
     >
-      <div className="overflow-hidden rounded-[18px]">
+      <div className="overflow-hidden rounded-[24px]">
         <Image
           src={product.image}
           alt={product.title}
           width={1200}
           height={630}
-          sizes="292px"
-          className="aspect-[280/146] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          sizes="340px"
+          className="aspect-[324/170] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
       </div>
-      <div className="px-[18px] pt-[22px] pb-6">
+      <div className="px-4 pt-[18px] pb-5 sm:px-5 sm:pt-[26px]">
         <div className="flex items-center justify-between">
-          <span className="flex items-center gap-3 text-[13px] text-[#555]">
-            <Image
-              src={product.icon}
-              alt=""
-              width={24}
-              height={24}
-              unoptimized={product.icon.endsWith(".svg")}
-              className="h-6 w-6 rounded-[6px]"
-            />
+          <span className="flex items-center gap-2.5 text-[14px] leading-[21px] font-medium text-ink-2">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
+              <Image
+                src={product.icon}
+                alt=""
+                width={20}
+                height={20}
+                unoptimized={product.icon.endsWith(".svg")}
+                className="h-5 w-5 rounded-[5px]"
+              />
+            </span>
             {product.domain}
           </span>
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#111] shadow-[0_1px_4px_rgba(0,0,0,0.08)] transition-transform group-hover:scale-110">
-            <ArrowUpRightIcon className="h-3 w-3" />
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink transition-transform group-hover:scale-110">
+            <ArrowUpRightIcon className="h-3.5 w-3.5" />
           </span>
         </div>
-        <h3 className="mt-6 text-[28px] leading-[1.06] font-bold tracking-[-0.045em] text-[#111]">
+        <h3 className="mt-3 text-[20px] leading-[1.1] font-bold tracking-[-0.045em] text-ink sm:mt-4 sm:text-[32px]">
           {product.title}
         </h3>
-        <p className="mt-2 text-[13px] leading-[1.3] text-[#666]">{product.description}</p>
+        <p className="mt-1.5 text-[14px] leading-[1.375] text-ink-2">{product.description}</p>
       </div>
     </a>
   );
 }
 
 const arrowButton =
-  "flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#111] shadow-[0_1px_6px_rgba(0,0,0,0.1)] transition-opacity disabled:opacity-30";
+  "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-ink transition-all hover:bg-surface-hover disabled:opacity-40";
 
 export function ProductsCarousel({ products }: { products: Product[] }) {
   const track = useRef<HTMLDivElement>(null);
@@ -74,9 +76,11 @@ export function ProductsCarousel({ products }: { products: Product[] }) {
         nearest = i;
       }
     });
-    setActive(nearest);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
-  }, []);
+    const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    // Past the last snap point the trailing cards can't reach the start edge.
+    setActive(end && el.scrollLeft > 0 ? products.length - 1 : nearest);
+    setAtEnd(end);
+  }, [products.length]);
 
   useEffect(() => {
     // On wide screens every card fits, so "next" must start disabled.
@@ -100,14 +104,14 @@ export function ProductsCarousel({ products }: { products: Product[] }) {
       <div
         ref={track}
         onScroll={update}
-        className="flex snap-x snap-mandatory gap-[14px] overflow-x-auto scroll-px-5 px-5 [scrollbar-width:none] sm:scroll-px-[86px] sm:px-[86px] [&::-webkit-scrollbar]:hidden"
+        className="track-gutter flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden"
       >
         {products.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}
       </div>
 
-      <div className="mt-7 flex items-center justify-between px-5 sm:max-w-[960px] sm:px-[86px]">
+      <div className="mx-auto mt-4 flex max-w-5xl items-center justify-between gap-3 px-4 sm:mt-6 sm:gap-4 sm:px-6">
         <button
           type="button"
           aria-label="Previous product"
@@ -115,9 +119,9 @@ export function ProductsCarousel({ products }: { products: Product[] }) {
           disabled={active === 0}
           className={arrowButton}
         >
-          <ChevronLeftIcon className="h-4 w-4" />
+          <ChevronLeftIcon className="h-[18px] w-[18px]" />
         </button>
-        <div className="flex items-center gap-[5px]">
+        <div className="flex items-center">
           {products.map((p, i) => (
             <button
               key={p.slug}
@@ -125,10 +129,14 @@ export function ProductsCarousel({ products }: { products: Product[] }) {
               aria-label={`Show ${p.name}`}
               aria-current={i === active}
               onClick={() => goTo(i)}
-              className={`h-[6px] rounded-full transition-all duration-300 ${
-                i === active ? "w-4 bg-[#111]" : "w-[6px] bg-[#ccc]"
-              }`}
-            />
+              className="flex h-8 items-center justify-center px-1"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? "w-[18px] bg-ink" : "w-1.5 bg-ink/20"
+                }`}
+              />
+            </button>
           ))}
         </div>
         <button
@@ -138,7 +146,7 @@ export function ProductsCarousel({ products }: { products: Product[] }) {
           disabled={atEnd}
           className={arrowButton}
         >
-          <ChevronRightIcon className="h-4 w-4" />
+          <ChevronRightIcon className="h-[18px] w-[18px]" />
         </button>
       </div>
     </div>

@@ -1,16 +1,8 @@
-import { SiteNav } from "@/components/site-nav";
+import { CompactHeader } from "@/components/compact-header";
 import { Hero } from "@/components/hero";
-import { ProblemSection } from "@/components/problem-section";
-import { AuditSection } from "@/components/audit-section";
-import { ProcessSection } from "@/components/process-section";
-import { PhotoBand } from "@/components/photo-band";
-import { PricingSection } from "@/components/pricing-section";
-import { FitSection } from "@/components/fit-section";
-import { AfterAuditSection } from "@/components/after-audit-section";
-import { FaqSection } from "@/components/faq-section";
-import { AboutSection } from "@/components/about-section";
-import { ContactSection } from "@/components/contact-section";
+import { ProductsCarousel } from "@/components/products-carousel";
 import { Footer } from "@/components/footer";
+import { products } from "@/lib/site";
 import { buildStructuredData } from "@/lib/structured-data";
 
 export default function Home() {
@@ -18,32 +10,21 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        // Derived entirely from lib/site.ts — no user input reaches this.
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildStructuredData()),
+          __html: JSON.stringify(buildStructuredData()).replace(/</g, "\\u003c"),
         }}
       />
-      <SiteNav />
+      <CompactHeader />
+      <Hero />
       <main>
-        <Hero />
-        <ProblemSection />
-        <AuditSection />
-        <ProcessSection />
-        {/* A breath before the money conversation. Add more bands here as
-            further photography comes in. */}
-        <PhotoBand
-          src="/images/mountain-desk.jpg"
-          alt="A mechanical keyboard, notebook and headphones laid out on a weathered wooden table"
-          position="center 86%"
-          label="Independent, remote, hands-on"
-          quote="I build the software I recommend. That is the whole difference."
-        />
-        <PricingSection />
-        <FitSection />
-        <AfterAuditSection />
-        <FaqSection />
-        <AboutSection />
-        <ContactSection />
+        <section id="products" className="mt-8 sm:mt-24">
+          <h2 className="mx-auto max-w-5xl px-4 sm:px-6 text-[clamp(30px,4.45vw,64px)] leading-[1.02] font-bold tracking-[-0.045em] text-ink">
+            Things I&rsquo;ve built
+          </h2>
+          <div className="mt-6 sm:mt-10">
+            <ProductsCarousel products={products} />
+          </div>
+        </section>
       </main>
       <Footer />
     </>

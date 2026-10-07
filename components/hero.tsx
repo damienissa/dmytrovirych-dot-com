@@ -1,76 +1,47 @@
 import Image from "next/image";
-import { audit, call } from "@/lib/site";
-import { ArrowRightIcon } from "./icons";
+import { siteConfig } from "@/lib/site";
+import { GitHubIcon, LinkedInIcon, XIcon } from "./icons";
 
-const specs = [
-  { term: "Duration", detail: audit.duration },
-  { term: "Starts with", detail: `${call.priceLabel} call` },
-  { term: "Your team's time", detail: "4–6 hours" },
-  { term: "You receive", detail: "Map + roadmap" },
+export const socials = [
+  { href: siteConfig.social.x, label: "X", Icon: XIcon },
+  { href: siteConfig.social.github, label: "GitHub", Icon: GitHubIcon },
+  { href: siteConfig.social.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
 ];
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      className="relative flex min-h-[92vh] flex-col justify-end overflow-hidden lg:min-h-screen"
-    >
-      <Image
-        src="/images/mountain-desk.jpg"
-        alt="A laptop, keyboard and coffee on a weathered wooden table, looking out over forested mountains in morning mist"
-        fill
-        sizes="100vw"
-        priority
-        className="object-cover"
-        style={{ objectPosition: "center 38%" }}
-      />
-      {/* Two scrims: one lifts the type off the sky, one keeps the foot readable. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(18,19,17,.95)_0%,rgba(18,19,17,.74)_26%,rgba(18,19,17,.20)_58%,rgba(18,19,17,.46)_100%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_right,rgba(18,19,17,.72)_0%,rgba(18,19,17,.42)_38%,rgba(18,19,17,.06)_72%,transparent_100%)]"
-      />
-
-      <div className="relative mx-auto w-full max-w-[1280px] px-6 pt-32 lg:px-14">
-        <span className="label rise">{audit.name}</span>
-        <h1 className="rise rise-1 mt-5 max-w-[15ch] text-[clamp(2.4rem,6.4vw,4.75rem)] font-medium leading-[1.03] tracking-[-0.038em]">
-          Find out where AI actually pays off.
+    <header id="top" className="bg-surface">
+      <div className="mx-auto max-w-5xl px-4 pt-16 pb-8 sm:px-6 sm:pt-[120px] sm:pb-[120px]">
+        <Image
+          src="/images/avatar.jpg"
+          alt={siteConfig.name}
+          width={352}
+          height={352}
+          priority
+          className="h-28 w-28 rounded-full object-cover sm:h-44 sm:w-44"
+        />
+        <h1 className="mt-5 text-[clamp(40px,7.8vw,112px)] leading-[1.02] font-bold tracking-[-0.055em] text-ink sm:leading-none">
+          {siteConfig.name}
         </h1>
-        <p className="rise rise-2 mt-6 max-w-[50ch] text-lg font-light leading-relaxed text-bone/80">
-          A two-week audit for small and mid-sized businesses. A scored map of
-          every AI opportunity you have, the return behind each one, and a
-          90-day roadmap your team can execute.
+        <p className="mt-5 text-[20px] leading-[1.4] text-ink/72 sm:mt-[31px] sm:text-[24px] sm:leading-[1.33]">
+          {siteConfig.tagline}
         </p>
-
-        <div className="rise rise-3 mt-9 flex flex-col gap-3 pb-12 sm:flex-row sm:items-center lg:pb-16">
-          <a href="#contact" className="btn-primary px-7 py-4 text-[15px]">
-            Book the {call.priceLabel} call
-            <ArrowRightIcon className="h-4 w-4" />
-          </a>
-          <a href="#audit" className="btn-ghost px-7 py-4 text-[15px]">
-            What the audit covers
-          </a>
-        </div>
-      </div>
-
-      {/* Spec strip along the foot of the photograph */}
-      <div className="relative border-t border-[var(--hair)]">
-        <dl className="mx-auto grid w-full max-w-[1280px] grid-cols-2 gap-x-8 gap-y-6 px-6 py-7 sm:grid-cols-4 lg:px-14">
-          {specs.map((spec) => (
-            <div key={spec.term}>
-              <dt className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-bone/50">
-                {spec.term}
-              </dt>
-              <dd className="mt-2 text-[17px] font-medium tracking-[-0.02em] lg:text-[19px]">
-                {spec.detail}
-              </dd>
-            </div>
+        <ul className="mt-6 flex gap-1.5 sm:mt-8 sm:gap-2">
+          {socials.map(({ href, label, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-white transition-transform hover:scale-105 active:scale-95 sm:h-14 sm:w-14"
+              >
+                <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
+              </a>
+            </li>
           ))}
-        </dl>
+        </ul>
       </div>
-    </section>
+    </header>
   );
 }

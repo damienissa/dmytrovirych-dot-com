@@ -1,123 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  /* Sampled from the reference photograph: the shadowed wood, the mist off
-     the far mountains, and the warm-lit grain of the table. The photographs
-     supply the colour on this site — the palette stays out of their way. */
-  --ground: #121311;
-  --ground-2: #191a17;
-  --bone: #f2f1ec;
-  --mist: #9ba29d;
-  --sand: #c9a87c;
-  --hair: rgba(242, 241, 236, 0.13);
-  --hair-strong: rgba(242, 241, 236, 0.28);
-}
-
 @theme inline {
-  --color-ground: var(--ground);
-  --color-ground-2: var(--ground-2);
-  --color-bone: var(--bone);
-  --color-mist: var(--mist);
-  --color-sand: var(--sand);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --color-ink: #111111;
+  --color-ink-2: #6b6b6b;
+  --color-surface: #f7f7f7;
+  --color-surface-hover: #efefef;
 }
 
 body {
-  background: var(--ground);
-  color: var(--bone);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  letter-spacing: -0.01em;
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem;
+/* Full-bleed carousel whose first card lines up with the 1024px column. */
+.track-gutter {
+  --gutter: 16px;
+  padding-inline: max(var(--gutter), calc((100% - 1024px) / 2 + 24px));
+  scroll-padding-inline: max(var(--gutter), calc((100% - 1024px) / 2 + 24px));
 }
-
-/* Small uppercase label — the only place the sand accent appears. */
-.label {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--sand);
-}
-.label-dim {
-  color: var(--mist);
-}
-
-/* Buttons: solid bone against the dark, or a hairline outline. No gradients. */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: var(--bone);
-  color: var(--ground);
-  font-weight: 500;
-  border-radius: 2px;
-  transition: background 0.2s ease;
-}
-.btn-primary:hover {
-  background: var(--sand);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  color: var(--bone);
-  border: 1px solid var(--hair-strong);
-  border-radius: 2px;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-.btn-ghost:hover {
-  border-color: var(--bone);
-  background: rgba(242, 241, 236, 0.06);
-}
-
-/* Form fields */
-.field {
-  width: 100%;
-  background: rgba(242, 241, 236, 0.035);
-  border: 1px solid var(--hair);
-  border-radius: 2px;
-  padding: 0.85rem 1rem;
-  color: var(--bone);
-  transition: border-color 0.2s ease;
-}
-.field::placeholder {
-  color: rgba(155, 162, 157, 0.65);
-}
-.field:focus {
-  outline: none;
-  border-color: var(--sand);
-}
-
-/* Entrance — slow and slight, in keeping with the photographs. */
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
+@media (min-width: 640px) {
+  .track-gutter {
+    --gutter: 24px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.rise {
-  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.rise-1 { animation-delay: 0.08s; }
-.rise-2 { animation-delay: 0.16s; }
-.rise-3 { animation-delay: 0.24s; }
-.rise-4 { animation-delay: 0.32s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; }
-  html { scroll-behavior: auto; }
 }
